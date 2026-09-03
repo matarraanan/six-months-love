@@ -1,0 +1,200 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "../vendor/shadcn-tailwind-4.13.0.css";
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@utility scrollbar-gutter-stable {
+  scrollbar-gutter: stable;
+}
+
+:root { --ink:#211713; --paper:#f8f3ec; --wine:#8f2f45; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; background:#100b09; }
+body { margin:0; color:var(--ink); font-family:Georgia,"Times New Roman",serif; }
+button { font:inherit; }
+.experience { min-height:100dvh; overflow-x:clip; }
+.page-enter { animation:page-in .9s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes page-in { from { opacity:0 } to { opacity:1 } }
+.overline { margin:0; letter-spacing:.28em; font:500 11px/1.4 Arial,sans-serif; color:rgba(255,255,255,.54); }
+.dark-overline { color:#8e6c5c; }
+.primary-button,.soft-button { border:0; cursor:pointer; border-radius:999px; transition:transform .3s,background .3s,box-shadow .3s; }
+.primary-button { min-width:170px; padding:16px 20px; color:#fff; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.3); backdrop-filter:blur(12px); letter-spacing:.04em; box-shadow:inset 0 1px rgba(255,255,255,.08),0 12px 50px rgba(0,0,0,.2); }
+.primary-button span { margin-left:12px; }.primary-button i { font-style:normal; color:#f5b1bd; }
+.primary-button:hover { transform:translateY(-3px); background:rgba(255,255,255,.16); }
+.primary-button:focus-visible,.soft-button:focus-visible { outline:2px solid #f1b9c4; outline-offset:4px; }
+
+.opening-screen,.flower-screen,.final-screen { min-height:100dvh; position:relative; overflow:hidden; color:#fff; background:radial-gradient(circle at 50% 20%,#32231d 0,#17100d 45%,#090605 100%); }
+.opening-screen { display:grid; place-items:center; text-align:center; padding:50px 22px; }
+.opening-glow { position:absolute; width:42vw; height:42vw; min-width:340px; min-height:340px; border-radius:50%; background:rgba(171,102,76,.13); filter:blur(45px); }
+.opening-content { position:relative; z-index:2; }
+.tiny-heart { display:block; color:#c47a88; font-size:17px; margin:21px auto; animation:heartbeat 2s infinite; }
+.opening-content h1 { margin:0 0 20px; font-size:clamp(48px,8vw,92px); font-weight:400; line-height:.98; letter-spacing:-.045em; text-wrap:balance; }
+.opening-note { margin:0 0 31px; color:rgba(255,255,255,.63); font-size:clamp(15px,2vw,18px); line-height:1.8; }
+.tap-note { position:absolute; bottom:22px; margin:0; color:rgba(255,255,255,.3); font:11px Arial,sans-serif; letter-spacing:.08em; }
+.stars i { --angle:calc(var(--i) * 15deg); position:absolute; top:50%; left:50%; width:2px; height:2px; background:#fff; border-radius:50%; transform:rotate(var(--angle)) translateX(42vw); opacity:calc(.12 + (var(--i) % 3) * .1); animation:star-pulse 3s calc(var(--i) * -.13s) infinite; }
+@keyframes heartbeat { 50% { transform:scale(1.2) } }
+@keyframes star-pulse { 50% { opacity:.65; box-shadow:0 0 8px #fff } }
+
+.flower-screen { min-height:100dvh; display:flex; align-items:flex-end; justify-content:center; }
+.flower-haze { position:absolute; inset:0; background:radial-gradient(circle at 50% 46%,rgba(144,73,69,.16),transparent 36%),radial-gradient(circle at 50% 100%,rgba(109,123,97,.12),transparent 40%); }
+.bouquet-scene { position:absolute; width:min(650px,94vw); height:min(760px,88dvh); left:50%; top:45%; transform:translate(-50%,-50%); }
+.stems,.flower-heads { position:absolute; inset:0; width:100%; height:100%; }
+.stem-path { fill:none; stroke:#647354; stroke-width:4; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; filter:drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
+.is-growing .stem-path { animation:draw-stem 1.9s var(--stem-delay) cubic-bezier(.3,.7,.2,1) forwards; }
+.leaf-path { fill:#657557; stroke:#7f8d72; stroke-width:2; opacity:0; transform-origin:center; }
+.is-growing .leaf-path { animation:leaf-open .8s 1.4s ease forwards; }
+.is-growing .leaf-path--two { animation-delay:1.7s }.is-growing .leaf-path--three { animation-delay:2s }
+@keyframes draw-stem { to { stroke-dashoffset:0 } }
+@keyframes leaf-open { from { opacity:0; transform:scale(.2) rotate(-8deg) } to { opacity:.9; transform:scale(1) rotate(0) } }
+.bloom { position:absolute; left:var(--x); top:var(--y); width:var(--size); height:var(--size); transform:translate(-50%,-50%) rotate(var(--r)) scale(0); filter:drop-shadow(0 9px 8px rgba(0,0,0,.18)); }
+.is-growing .bloom { animation:flower-open .95s var(--delay) cubic-bezier(.15,.85,.18,1.35) forwards; }
+@keyframes flower-open { 0% { transform:translate(-50%,-45%) rotate(var(--r)) scale(0); opacity:0 } 75% { transform:translate(-50%,-50%) rotate(var(--r)) scale(1.08); opacity:1 } 100% { transform:translate(-50%,-50%) rotate(var(--r)) scale(1); opacity:1 } }
+.rose-shape,.peony-shape,.daisy-shape,.baby-shape,.tulip-shape { position:absolute; inset:0; display:block; }
+.rose-shape i,.peony-shape i { position:absolute; inset:8%; background:var(--petal); border-radius:50% 44% 48% 45%; box-shadow:inset 8px 7px rgba(255,255,255,.09),inset -6px -7px rgba(78,8,28,.12); }
+.rose-shape i:nth-child(1) { transform:translate(-18%,3%) rotate(-30deg) scale(.72) }.rose-shape i:nth-child(2) { transform:translate(17%,3%) rotate(35deg) scale(.72) }.rose-shape i:nth-child(3) { transform:translate(0,-18%) rotate(4deg) scale(.72) }.rose-shape i:nth-child(4) { transform:translate(-8%,16%) rotate(55deg) scale(.65) }.rose-shape i:nth-child(5) { transform:translate(9%,10%) rotate(-55deg) scale(.58) }
+.rose-shape b { position:absolute; inset:37%; border-radius:50%; background:color-mix(in srgb,var(--petal) 72%,#5d1830); box-shadow:inset 3px 2px rgba(255,255,255,.14); }
+.peony-shape i { border-radius:50%; inset:13% }.peony-shape i:nth-child(1) { transform:translateX(-26%) scale(.75) }.peony-shape i:nth-child(2) { transform:translateX(26%) scale(.75) }.peony-shape i:nth-child(3) { transform:translateY(-26%) scale(.75) }.peony-shape i:nth-child(4) { transform:translateY(26%) scale(.75) }.peony-shape i:nth-child(5) { transform:translate(-18%,-14%) scale(.62) }.peony-shape i:nth-child(6) { transform:translate(18%,14%) scale(.62) }
+.peony-shape b { position:absolute; inset:35%; border-radius:50%; background:#d48796; box-shadow:0 0 0 5px color-mix(in srgb,var(--petal) 85%,white); }
+.tulip-shape { top:8%; left:12%; right:12%; bottom:10%; background:var(--petal); border-radius:44% 44% 52% 52%; box-shadow:inset 8px 5px rgba(255,255,255,.12),inset -8px -5px rgba(70,20,20,.08); }
+.tulip-shape i { position:absolute; top:-10%; width:52%; height:45%; background:var(--petal); border-radius:60% 60% 18% 18%; }
+.tulip-shape i:nth-child(1) { left:0; transform:rotate(-17deg) }.tulip-shape i:nth-child(2) { left:24%; top:-18%; z-index:2 }.tulip-shape i:nth-child(3) { right:0; transform:rotate(17deg) }
+.daisy-shape i,.baby-shape i { position:absolute; left:38%; top:4%; width:24%; height:48%; background:var(--petal); border-radius:60% 60% 48% 48%; transform-origin:50% 96%; box-shadow:inset 2px 3px rgba(255,255,255,.4); }
+.daisy-shape i:nth-child(2),.baby-shape i:nth-child(2) { transform:rotate(45deg) }.daisy-shape i:nth-child(3),.baby-shape i:nth-child(3) { transform:rotate(90deg) }.daisy-shape i:nth-child(4),.baby-shape i:nth-child(4) { transform:rotate(135deg) }.daisy-shape i:nth-child(5),.baby-shape i:nth-child(5) { transform:rotate(180deg) }.daisy-shape i:nth-child(6) { transform:rotate(225deg) }.daisy-shape i:nth-child(7) { transform:rotate(270deg) }.daisy-shape i:nth-child(8) { transform:rotate(315deg) }
+.daisy-shape b,.baby-shape b { position:absolute; inset:35%; border-radius:50%; background:#dfb65c; box-shadow:inset 2px 2px rgba(255,255,255,.35); }
+.baby-shape i { width:27%; height:42%; left:36.5%; top:9% }.baby-shape b { inset:34%; background:#d8bd76 }
+.ribbon { position:absolute; left:50%; top:82%; width:75px; height:45px; opacity:0; transform:translate(-50%,-50%) scale(.4); }
+.is-growing .ribbon { animation:ribbon-in .7s 2.9s ease forwards; }
+.ribbon span { position:absolute; left:16px; top:8px; width:43px; height:19px; background:#b97c6d; border-radius:6px; transform:rotate(-2deg); box-shadow:inset 0 4px rgba(255,255,255,.1); }
+.ribbon i,.ribbon b { position:absolute; width:35px; height:42px; top:13px; background:#a96b60; clip-path:polygon(0 0,100% 18%,64% 100%,42% 62%,0 100%); }
+.ribbon i { left:5px; transform:rotate(14deg) }.ribbon b { right:5px; transform:scaleX(-1) rotate(14deg) }
+@keyframes ribbon-in { to { opacity:1; transform:translate(-50%,-50%) scale(1) } }
+.flower-message { position:relative; z-index:4; width:100%; text-align:center; padding:0 20px 5vh; pointer-events:none; }
+.flower-line { opacity:0; transform:translateY(12px); margin:6px 0; text-shadow:0 2px 20px #000; transition:.8s ease; font-size:clamp(18px,3vw,28px); }
+.flower-line--two { font-size:clamp(22px,4vw,34px) }.flower-line span { color:#e795a5 }
+.flower-message.step-1 .flower-line--one,.flower-message.step-2 .flower-line { opacity:1; transform:none }
+.soft-button { margin-top:17px; padding:13px 26px; background:#efe4da; color:#3b2820; opacity:0; transform:translateY(9px); pointer-events:none; box-shadow:0 12px 35px rgba(0,0,0,.25); }
+.flower-message.step-2 .soft-button { opacity:1; transform:none; pointer-events:auto; transition-delay:.6s }.soft-button span { margin-right:10px }
+
+.recap-screen { min-height:100vh; background:var(--paper); color:var(--ink); }
+.recap-hero { min-height:100dvh; position:relative; max-width:1180px; margin:auto; padding:14vh 7vw 10vh; display:grid; align-content:center; grid-template-columns:minmax(0,1fr) minmax(280px,520px); gap:60px; overflow:hidden; }
+.recap-number { font-size:clamp(220px,38vw,520px); line-height:.65; color:#eadfd4; position:absolute; left:-2vw; top:15vh; letter-spacing:-.13em; user-select:none; }
+.recap-hero > div { position:relative; z-index:2; grid-column:2 }
+.recap-hero h2 { font-size:clamp(64px,10vw,126px); line-height:.82; letter-spacing:-.065em; font-weight:400; margin:22px 0 32px; }
+.recap-hero h2 em { color:var(--wine); font-weight:400 }.recap-hero > div > p:last-of-type { max-width:500px; font-size:19px; line-height:1.85; color:#78645a }
+.scroll-cue { position:absolute!important; bottom:33px; left:50%; transform:translateX(-50%); grid-column:auto!important; font:11px Arial,sans-serif; color:#9d867b; letter-spacing:.08em; white-space:nowrap; }
+.scroll-cue i { display:inline-block; width:1px; height:35px; background:#bba89d; margin:0 0 -13px 12px; animation:scroll-line 1.8s infinite; transform-origin:top; }
+@keyframes scroll-line { 0%,100% { transform:scaleY(.35) } 50% { transform:scaleY(1) } }
+.recap-content { max-width:1180px; margin:auto; padding:30px 6vw 130px; position:relative; }
+.memory-section { min-height:85vh; display:grid; grid-template-columns:minmax(220px,.72fr) minmax(0,1.35fr); align-items:center; gap:8vw; padding:80px 0; }
+.memory-section--reverse { grid-template-columns:minmax(0,1.35fr) minmax(220px,.72fr) }.memory-section--reverse .memory-copy { order:2 }.memory-section--reverse .photo-collage { order:1 }
+.memory-copy { position:relative }.chapter-number { position:absolute; font-size:130px; color:#eee4da; top:-94px; right:-12px; line-height:1; z-index:0 }
+.memory-copy > *:not(.chapter-number) { position:relative; z-index:1 }.section-eyebrow { font:600 11px Arial,sans-serif; letter-spacing:.19em; color:var(--wine); text-transform:uppercase }
+.memory-copy h3 { font-size:clamp(42px,5vw,67px); line-height:1.02; font-weight:400; letter-spacing:-.04em; margin:15px 0 24px; }.memory-copy > p:last-child { font-size:17px; line-height:1.9; color:#7e6a60 }
+.photo-collage { min-height:560px; position:relative }.memory-photo { position:absolute; margin:0; overflow:hidden; background:#d8ccc0; box-shadow:0 22px 60px rgba(59,40,31,.16) }
+.memory-photo img { width:100%; height:100%; display:block; object-fit:cover; filter:sepia(.08) saturate(.88); transition:transform .7s ease,filter .7s ease }.memory-photo:hover img { transform:scale(1.035); filter:sepia(0) saturate(1) }
+.memory-photo figcaption { position:absolute; inset:auto 0 0; padding:25px 14px 12px; color:rgba(255,255,255,.78); background:linear-gradient(transparent,rgba(0,0,0,.55)); font:10px Arial,sans-serif; letter-spacing:.08em; opacity:0; transition:opacity .3s }.memory-photo:hover figcaption { opacity:1 }
+.collage-3 .memory-photo:nth-child(1) { width:54%; height:78%; top:4%; right:0; transform:rotate(1.5deg) }.collage-3 .memory-photo:nth-child(2) { width:39%; height:55%; bottom:0; left:4%; transform:rotate(-3deg) }.collage-3 .memory-photo:nth-child(3) { width:35%; height:38%; top:1%; left:8%; transform:rotate(4deg) }
+.collage-2 .memory-photo:nth-child(1) { width:72%; height:62%; top:3%; left:0 }.collage-2 .memory-photo:nth-child(2) { width:46%; height:58%; bottom:0; right:0; transform:rotate(3deg) }
+.continue-panel { padding:100px 20px 140px; text-align:center; background:#e9ded3 }.continue-panel p { font-size:24px; margin:0 0 25px }.primary-button--dark { background:#2b1c17; border-color:#2b1c17 }
+
+.final-screen { min-height:100vh; padding:9vh 5vw 7vh; text-align:center; background:radial-gradient(circle at 50% 33%,#3a2720,#17100d 55%,#080504 100%); }
+.final-copy { position:relative; z-index:4 }.final-copy h2 { margin:20px 0 27px; font-size:clamp(54px,9vw,110px); line-height:.83; font-weight:400; letter-spacing:-.055em }.final-copy h2 em { color:#dfa0ad; font-weight:400 }
+.final-copy > p:not(.overline) { margin:6px 0; font-size:clamp(20px,3vw,30px); color:rgba(255,255,255,.78) }.final-copy span { color:#e795a5 }
+.floral-frame { position:relative; width:min(760px,92vw); height:min(720px,96vw); min-height:500px; margin:55px auto 35px; }
+.frame-vines { position:absolute; inset:-3%; width:106%; height:106%; overflow:visible }.frame-vines path { fill:none; stroke:#7f8e6b; stroke-width:3; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; animation:draw-frame 2.1s .15s ease forwards }
+@keyframes draw-frame { to { stroke-dashoffset:0 } }
+.final-photos { position:absolute; inset:10% 11% }.final-photos figure { position:absolute; margin:0; overflow:hidden; background:#cfc3b9; border:8px solid #efe4d8; box-shadow:0 25px 65px rgba(0,0,0,.37) }
+.final-photos figure:nth-child(1) { width:56%; height:79%; left:22%; top:4%; z-index:3; transform:rotate(-1deg) }.final-photos figure:nth-child(2) { width:36%; height:53%; left:2%; top:31%; z-index:2; transform:rotate(-8deg) }.final-photos figure:nth-child(3) { width:35%; height:51%; right:1%; top:29%; z-index:2; transform:rotate(8deg) }
+.final-photos img { width:100%; height:100%; object-fit:cover; display:block }.final-photos figcaption { position:absolute; bottom:0; inset-inline:0; padding:10px; color:#766057; background:#efe4d8; font-size:12px }
+.frame-flowers { position:absolute; inset:0 }.bloom--framed { animation:frame-flower-in .75s var(--delay) cubic-bezier(.18,.8,.2,1.3) forwards; z-index:5 }
+@keyframes frame-flower-in { from { opacity:0; transform:translate(-50%,-50%) rotate(var(--r)) scale(.1) } to { opacity:1; transform:translate(-50%,-50%) rotate(var(--r)) scale(1) } }
+.final-signoff { position:relative; z-index:5; margin:0 auto; max-width:700px }.date-rule { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:20px; font:10px Arial,sans-serif; letter-spacing:.22em; color:rgba(255,255,255,.42) }.date-rule i { height:1px; background:rgba(255,255,255,.16) }
+.final-signoff h3 { margin:35px 0 12px; font-size:clamp(34px,6vw,65px); font-weight:400 }.final-signoff p { color:rgba(255,255,255,.6); font-size:17px }
+
+/* Every flower below is assembled and animated from CSS elements. */
+.bouquet-scene { width:min(780px,99vw); height:min(790px,82dvh); top:43%; isolation:isolate; }
+.bouquet-aura { position:absolute; inset:15% 10% 8%; border-radius:50%; background:radial-gradient(circle,rgba(181,67,91,.2),rgba(113,80,54,.07) 50%,transparent 72%); filter:blur(30px); animation:aura-breathe 3.5s 1.5s ease-in-out infinite alternate; }
+.css-bouquet { position:absolute; inset:0; }
+.bouquet-stem { position:absolute; z-index:2; width:4px; height:var(--height); left:50%; bottom:7%; transform:translateX(-50%) rotate(var(--angle)); transform-origin:50% 100%; }
+.green-stem { position:absolute; inset:0; border-radius:999px; background:linear-gradient(90deg,#3f533d,#81916a 45%,#344532); transform:scaleY(0); transform-origin:50% 100%; box-shadow:inset 1px 0 rgba(255,255,255,.2); animation:crafted-stem-grow 1.55s calc(.12s + var(--delay)) cubic-bezier(.26,.75,.22,1) forwards; }
+.stem-head { position:absolute; z-index:3; left:50%; top:0; width:var(--size); height:var(--size); transform:translate(-50%,-43%) rotate(var(--counter-angle)); }
+.leaf { position:absolute; width:42px; height:20px; top:48%; left:1px; border-radius:100% 0 100% 0; background:linear-gradient(145deg,#83906c,#455840 72%); transform-origin:0 100%; opacity:0; animation:crafted-leaf-open .62s calc(.85s + var(--delay)) ease forwards; }
+.leaf-two { top:68%; left:2px; transform:scaleX(-1); animation-delay:calc(1.08s + var(--delay)); }
+.bouquet-stem:nth-child(3n) .leaf-one { top:34% }.bouquet-stem:nth-child(2n) .leaf-two { top:58% }
+
+.crafted-bloom,.baby-cluster,.eucalyptus-sprig { position:absolute; inset:0; display:block; filter:drop-shadow(0 8px 7px rgba(0,0,0,.22)); }
+.crafted-bloom i { position:absolute; display:block; background:var(--petal); box-shadow:inset 6px 5px rgba(255,255,255,.13),inset -5px -6px rgba(66,12,29,.12); opacity:0; scale:0; animation:petal-assemble .68s calc(1.55s + var(--delay) + var(--petal-step,0s)) cubic-bezier(.15,.82,.2,1.3) forwards; }
+.crafted-bloom i:nth-child(1) { --petal-step:0s }.crafted-bloom i:nth-child(2) { --petal-step:.06s }.crafted-bloom i:nth-child(3) { --petal-step:.12s }.crafted-bloom i:nth-child(4) { --petal-step:.18s }.crafted-bloom i:nth-child(5) { --petal-step:.24s }.crafted-bloom i:nth-child(6) { --petal-step:.3s }.crafted-bloom i:nth-child(7) { --petal-step:.36s }.crafted-bloom i:nth-child(8) { --petal-step:.42s }.crafted-bloom i:nth-child(9) { --petal-step:.48s }.crafted-bloom i:nth-child(10) { --petal-step:.54s }.crafted-bloom i:nth-child(11) { --petal-step:.6s }.crafted-bloom i:nth-child(12) { --petal-step:.66s }
+.crafted-bloom b,.crafted-bloom em { opacity:0; scale:0; animation:flower-center-assemble .55s calc(2.08s + var(--delay)) ease forwards; }
+.crafted-bloom em { animation-delay:calc(2.25s + var(--delay)) }
+.crafted-bloom--rose i { left:24%; top:12%; width:52%; height:64%; border-radius:58% 42% 55% 45%; transform-origin:50% 72%; transform:rotate(var(--rot,0deg)) translateY(-12%) scale(.82); }
+.crafted-bloom--rose i:nth-child(1) { --rot:0deg }.crafted-bloom--rose i:nth-child(2) { --rot:40deg }.crafted-bloom--rose i:nth-child(3) { --rot:80deg }.crafted-bloom--rose i:nth-child(4) { --rot:120deg }.crafted-bloom--rose i:nth-child(5) { --rot:160deg }.crafted-bloom--rose i:nth-child(6) { --rot:200deg }.crafted-bloom--rose i:nth-child(7) { --rot:240deg }.crafted-bloom--rose i:nth-child(8) { --rot:280deg }.crafted-bloom--rose i:nth-child(9) { --rot:320deg; transform:rotate(320deg) translateY(2%) scale(.58) }
+.crafted-bloom--rose b { position:absolute; inset:33%; border-radius:55% 45% 60% 40%; background:color-mix(in srgb,var(--petal) 66%,#57162c); box-shadow:0 0 0 5px color-mix(in srgb,var(--petal) 82%,#7b203b),inset 2px 2px rgba(255,255,255,.16); transform:rotate(35deg); }
+.crafted-bloom--rose em { position:absolute; inset:42%; border:2px solid rgba(255,218,223,.35); border-radius:50%; transform:rotate(-25deg); }
+
+.crafted-bloom--peony i { left:26%; top:8%; width:48%; height:68%; border-radius:55% 55% 45% 45%; transform-origin:50% 75%; transform:rotate(var(--rot,0deg)) translateY(-16%) scale(.9); }
+.crafted-bloom--peony i:nth-child(1) { --rot:0deg }.crafted-bloom--peony i:nth-child(2) { --rot:36deg }.crafted-bloom--peony i:nth-child(3) { --rot:72deg }.crafted-bloom--peony i:nth-child(4) { --rot:108deg }.crafted-bloom--peony i:nth-child(5) { --rot:144deg }.crafted-bloom--peony i:nth-child(6) { --rot:180deg }.crafted-bloom--peony i:nth-child(7) { --rot:216deg }.crafted-bloom--peony i:nth-child(8) { --rot:252deg }.crafted-bloom--peony i:nth-child(9) { --rot:288deg }.crafted-bloom--peony i:nth-child(10) { --rot:324deg }
+.crafted-bloom--peony b { position:absolute; inset:31%; border-radius:50%; background:color-mix(in srgb,var(--petal) 78%,#b65d79); box-shadow:0 0 0 7px color-mix(in srgb,var(--petal) 88%,white); }
+.crafted-bloom--peony em { position:absolute; inset:42%; border-radius:50%; background:#d89aaa; box-shadow:0 0 0 3px rgba(255,255,255,.12); }
+
+.crafted-bloom--daisy i { left:39%; top:1%; width:22%; height:50%; border-radius:60% 60% 48% 48%; transform-origin:50% 98%; transform:rotate(var(--rot,0deg)); background:linear-gradient(90deg,#e8dfcf,var(--petal) 48%,#f2e8d7); }
+.crafted-bloom--daisy i:nth-child(1) { --rot:0deg }.crafted-bloom--daisy i:nth-child(2) { --rot:30deg }.crafted-bloom--daisy i:nth-child(3) { --rot:60deg }.crafted-bloom--daisy i:nth-child(4) { --rot:90deg }.crafted-bloom--daisy i:nth-child(5) { --rot:120deg }.crafted-bloom--daisy i:nth-child(6) { --rot:150deg }.crafted-bloom--daisy i:nth-child(7) { --rot:180deg }.crafted-bloom--daisy i:nth-child(8) { --rot:210deg }.crafted-bloom--daisy i:nth-child(9) { --rot:240deg }.crafted-bloom--daisy i:nth-child(10) { --rot:270deg }.crafted-bloom--daisy i:nth-child(11) { --rot:300deg }.crafted-bloom--daisy i:nth-child(12) { --rot:330deg }
+.crafted-bloom--daisy b { position:absolute; inset:34%; border-radius:50%; background:radial-gradient(circle at 35% 30%,#f4d87b,#c28d2d 70%); box-shadow:inset -4px -5px rgba(91,56,13,.14); }
+.crafted-bloom--daisy em { position:absolute; inset:39%; border-radius:50%; border:2px dotted rgba(103,61,16,.55); }
+
+.crafted-bloom--tulip { inset:7% 14% 12%; border-radius:45% 45% 55% 55%; background:transparent; overflow:visible; }
+.crafted-bloom--tulip i { top:-13%; width:58%; height:66%; border-radius:60% 60% 25% 25%; background:var(--petal); transform-origin:50% 100%; }
+.crafted-bloom--tulip i:nth-child(1) { left:-5%; transform:rotate(-15deg) }.crafted-bloom--tulip i:nth-child(2) { left:21%; top:-23%; z-index:2 }.crafted-bloom--tulip i:nth-child(3) { right:-5%; transform:rotate(15deg) }.crafted-bloom--tulip i:nth-child(4) { left:20%; top:10%; opacity:.32 }
+.crafted-bloom--tulip b { position:absolute; left:48%; bottom:5%; width:2px; height:78%; background:rgba(90,27,42,.22); }.crafted-bloom--tulip em { display:none }
+
+.baby-cluster i { position:absolute; width:24%; height:24%; border-radius:50%; background:radial-gradient(circle at 50% 50%,#d9b75c 0 11%,var(--petal) 13% 48%,transparent 51%); transform:scale(0); animation:tiny-flower-pop .48s calc(1.65s + var(--delay,0s) + var(--tiny,0s)) ease forwards; }
+.baby-cluster i:nth-child(1) { left:38%; top:3%; --tiny:.05s }.baby-cluster i:nth-child(2) { left:10%; top:20%; --tiny:.1s }.baby-cluster i:nth-child(3) { right:8%; top:20%; --tiny:.16s }.baby-cluster i:nth-child(4) { left:25%; top:38%; --tiny:.22s }.baby-cluster i:nth-child(5) { right:22%; top:42%; --tiny:.28s }.baby-cluster i:nth-child(6) { left:4%; top:57%; --tiny:.34s }.baby-cluster i:nth-child(7) { right:3%; top:60%; --tiny:.4s }.baby-cluster i:nth-child(8) { left:34%; top:68%; --tiny:.46s }.baby-cluster i:nth-child(9) { right:29%; top:7%; --tiny:.52s }
+.eucalyptus-sprig i { position:absolute; width:39%; height:28%; border-radius:50%; background:linear-gradient(135deg,#8ca195,#557264); box-shadow:inset 4px 4px rgba(255,255,255,.09); opacity:0; scale:0; animation:eucalyptus-leaf-build .55s calc(1.45s + var(--delay) + var(--leaf-step,0s)) ease forwards; }
+.eucalyptus-sprig i:nth-child(1) { --leaf-step:0s }.eucalyptus-sprig i:nth-child(2) { --leaf-step:.09s }.eucalyptus-sprig i:nth-child(3) { --leaf-step:.18s }.eucalyptus-sprig i:nth-child(4) { --leaf-step:.27s }.eucalyptus-sprig i:nth-child(5) { --leaf-step:.36s }.eucalyptus-sprig i:nth-child(6) { --leaf-step:.45s }.eucalyptus-sprig i:nth-child(7) { --leaf-step:.54s }
+.eucalyptus-sprig i:nth-child(1) { left:8%; top:55%; transform:rotate(-20deg) }.eucalyptus-sprig i:nth-child(2) { right:5%; top:45%; transform:rotate(22deg) }.eucalyptus-sprig i:nth-child(3) { left:12%; top:28%; transform:rotate(-18deg) }.eucalyptus-sprig i:nth-child(4) { right:10%; top:18%; transform:rotate(20deg) }.eucalyptus-sprig i:nth-child(5) { left:31%; top:0 }.eucalyptus-sprig i:nth-child(6) { left:2%; top:72%; transform:rotate(-25deg) }.eucalyptus-sprig i:nth-child(7) { right:0; top:67%; transform:rotate(25deg) }
+
+.bouquet-ribbon { position:absolute; z-index:7; left:50%; bottom:3%; width:92px; height:82px; opacity:0; transform:translateX(-50%) scale(.25); animation:ribbon-tie .75s 3.15s cubic-bezier(.2,.8,.2,1.3) forwards; }
+.bouquet-ribbon span { position:absolute; z-index:2; left:21px; top:8px; width:50px; height:22px; border-radius:6px; background:linear-gradient(#c58c82,#9e5e5c); box-shadow:inset 0 4px rgba(255,255,255,.12); }
+.bouquet-ribbon i,.bouquet-ribbon b { position:absolute; top:18px; width:52px; height:62px; background:linear-gradient(120deg,#b87570,#8d4d51); clip-path:polygon(0 0,100% 18%,68% 100%,45% 66%,0 100%); }
+.bouquet-ribbon i { left:0; transform:rotate(10deg) }.bouquet-ribbon b { right:0; transform:scaleX(-1) rotate(10deg) }
+.bouquet-sparkles i { position:absolute; z-index:8; left:50%; top:40%; width:3px; height:3px; border-radius:50%; background:#f7e2a8; box-shadow:0 0 10px #f7dca0; opacity:0; transform:rotate(var(--spark-angle)) translateX(clamp(130px,27vw,250px)); animation:botanical-spark 2.8s var(--spark-delay) ease-in-out infinite; }
+@keyframes crafted-stem-grow { to { transform:scaleY(1) } }
+@keyframes crafted-leaf-open { from { opacity:0; transform:scale(.1) rotate(-20deg) } to { opacity:1; transform:scale(1) rotate(-6deg) } }
+@keyframes tiny-flower-pop { to { transform:scale(1) } }
+@keyframes petal-assemble { 0% { opacity:0; scale:0; filter:brightness(.7) } 72% { opacity:1; scale:1.12; filter:brightness(1.12) } 100% { opacity:1; scale:1; filter:brightness(1) } }
+@keyframes flower-center-assemble { to { opacity:1; scale:1 } }
+@keyframes eucalyptus-leaf-build { 0% { opacity:0; scale:0 } 75% { opacity:1; scale:1.12 } 100% { opacity:1; scale:1 } }
+@keyframes ribbon-tie { to { opacity:1; transform:translateX(-50%) scale(1) } }
+@keyframes aura-breathe { from { opacity:.22; transform:scale(.95) } to { opacity:.62; transform:scale(1.05) } }
+@keyframes botanical-spark { 0%,100% { opacity:0; scale:.3 } 45% { opacity:.85; scale:1 } 70% { opacity:.15; scale:.55 } }
+
+.floral-frame { height:min(810px,118vw); width:min(760px,94vw); min-height:590px; isolation:isolate; }
+.final-photos { z-index:2; inset:15% 14%; }
+.css-wreath { position:absolute; z-index:5; inset:0; }
+.wreath-vine { position:absolute; inset:5%; border:3px solid #607154; border-radius:48% 52% 49% 51%; opacity:0; transform:scale(.72) rotate(-7deg); animation:wreath-vine-grow 1.45s .15s ease forwards; box-shadow:0 0 0 1px rgba(134,153,111,.16); }
+.wreath-vine-two { inset:7%; border-color:#778668; transform:scale(.72) rotate(8deg); animation-delay:.35s }
+.frame-flower { position:absolute; left:var(--x); top:var(--y); width:var(--size); height:var(--size); opacity:1; transform:translate(-50%,-50%) rotate(var(--rotate)); filter:drop-shadow(0 9px 10px rgba(0,0,0,.24)); }
+.frame-flower::before,.frame-flower::after { content:""; position:absolute; z-index:-1; width:48%; height:24%; left:1%; top:58%; border-radius:100% 0 100% 0; background:linear-gradient(145deg,#879275,#485a43); transform:rotate(22deg); }
+.frame-flower::after { left:auto; right:1%; transform:scaleX(-1) rotate(22deg) }
+.frame-flower::before,.frame-flower::after { opacity:0; scale:0; animation:frame-leaf-build .55s calc(.35s + var(--delay)) ease forwards }
+.wreath-light { position:absolute; z-index:1; inset:8%; border-radius:50%; background:radial-gradient(circle,rgba(194,91,107,.15),transparent 67%); filter:blur(22px); animation:aura-breathe 3s 1s ease-in-out infinite alternate; }
+@keyframes wreath-vine-grow { to { opacity:.88; transform:scale(1) rotate(-7deg) } }
+@keyframes frame-leaf-build { to { opacity:1; scale:1 } }
+
+@media (max-width:760px) {
+  .bouquet-scene { top:40%; height:74dvh; width:100vw; scale:.86 }.flower-message { padding-bottom:4vh }.flower-line { font-size:17px }
+  .recap-hero { padding:12vh 24px 10vh; grid-template-columns:1fr; align-content:center }.recap-number { font-size:245px; top:18vh; left:-32px }.recap-hero > div { grid-column:1 }.recap-hero h2 { font-size:70px }
+  .memory-section,.memory-section--reverse { min-height:auto; grid-template-columns:1fr; gap:25px; padding:90px 0 45px }.memory-section--reverse .memory-copy { order:0 }.memory-section--reverse .photo-collage { order:1 }.memory-copy h3 { font-size:45px }.photo-collage { min-height:470px }.recap-content { padding-inline:24px }
+  .floral-frame { height:132vw; min-height:500px; margin-top:45px }.final-screen { padding-inline:14px }.date-rule { gap:8px; letter-spacing:.08em }
+  .final-photos { inset:19% 17% 18% }
+}
+@media (max-height:700px) and (min-width:761px) { .bouquet-scene { height:72dvh; top:39% }.flower-message { padding-bottom:3vh } }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-delay:0ms!important; scroll-behavior:auto!important; transition-duration:.01ms!important } }
