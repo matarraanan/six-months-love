@@ -43,20 +43,22 @@ export const content = {
 };
 
 export const photos = [
-  "https://picsum.photos/seed/us-start-1/1100/1300",
-  "https://picsum.photos/seed/us-start-2/1100/1300",
-  "https://picsum.photos/seed/us-start-3/1100/1300",
-  "https://picsum.photos/seed/our-date-1/1300/1000",
-  "https://picsum.photos/seed/our-date-2/1100/1300",
-  "https://picsum.photos/seed/funny-us-1/1100/1300",
-  "https://picsum.photos/seed/funny-us-2/1100/1300",
-  "https://picsum.photos/seed/funny-us-3/1100/1300",
-  "https://picsum.photos/seed/trip-together-1/1300/1000",
-  "https://picsum.photos/seed/trip-together-2/1100/1300",
-  "https://picsum.photos/seed/love-memory-1/1100/1300",
-  "https://picsum.photos/seed/love-memory-2/1100/1300",
-  "https://picsum.photos/seed/love-memory-3/1100/1300",
-  "https://picsum.photos/seed/final-us-main/900/1100",
-  "https://picsum.photos/seed/final-us-left/700/900",
-  "https://picsum.photos/seed/final-us-right/700/900",
+  "/photos/0.JPG",
+  "/photos/01.jpg",
+  "/photos/02.JPG",
+  "/photos/03.jpg",
+  "/photos/04.jpg",
+  "/photos/05.jpg",
+  "/photos/06.jpg",
+  "/photos/07.jpg",
+  "/photos/8.jpg",
+  "/photos/09.jpg",
+  "/photos/10.jpg",
+  "/photos/11.jpg",
+  "/photos/12.jpg",
+
+  // שלוש התמונות במסך הסיום
+  "/photos/10.jpg",
+  "/photos/11.jpg",
+  "/photos/12.jpg",
 ];
